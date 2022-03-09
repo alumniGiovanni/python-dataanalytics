@@ -1,4 +1,5 @@
 import pandas as pd
+import plotly.express as px
 
 
 tabela = pd.read_csv("telecom_users.csv")
@@ -17,3 +18,8 @@ print(tabela.info())
 #cancelamentos
 print(tabela["Churn"].value_counts())
 print(tabela["Churn"].value_counts(normalize=True).map("{:.1%}".format))
+
+for coluna in tabela.columns:
+    # https://plotly.com/python/histograms/
+    grafico = px.histogram(tabela, x=coluna, color="Churn")
+    grafico.show()
